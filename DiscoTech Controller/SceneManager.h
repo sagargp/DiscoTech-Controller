@@ -7,11 +7,9 @@
 //
 
 #import "cocos2d.h"
-#import "MenuLayer.h"
 
 @interface SceneManager : NSObject
 
-+(void)goMenu;
 +(void)goRobot;
 
 @end

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BED435214C555CD005FE3A2 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BED435114C555CD005FE3A2 /* MainWindow.xib */; };
+		1BED435614C55A37005FE3A2 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BED435414C55A37005FE3A2 /* MainMenuViewController.m */; };
+		1BED435714C55A37005FE3A2 /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BED435514C55A37005FE3A2 /* MainMenuViewController.xib */; };
+		1BED435914C5659C005FE3A2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BED435814C5659C005FE3A2 /* RootViewController.xib */; };
+		1BED436A14C5EC4A005FE3A2 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BED436814C5EC4A005FE3A2 /* SettingsViewController.m */; };
+		1BED436B14C5EC4A005FE3A2 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BED436914C5EC4A005FE3A2 /* SettingsViewController.xib */; };
 		5B118E3C13CE02910052E176 /* SendUDP.c in Sources */ = {isa = PBXBuildFile; fileRef = 5B118E3A13CE02910052E176 /* SendUDP.c */; };
 		5BA0AF0813CCFB1C00F9F212 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA0AF0713CCFB1C00F9F212 /* QuartzCore.framework */; };
 		5BA0AF0A13CCFB1C00F9F212 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA0AF0913CCFB1C00F9F212 /* OpenGLES.framework */; };
@@ -123,7 +129,6 @@
 		5BA0B06B13CCFB1F00F9F212 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0B06A13CCFB1F00F9F212 /* AppDelegate.m */; };
 		5BA0B06E13CCFB1F00F9F212 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0B06D13CCFB1F00F9F212 /* RootViewController.m */; };
 		5BA0B07E13CCFDF800F9F212 /* SceneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0B07D13CCFDF800F9F212 /* SceneManager.m */; };
-		5BA0B08113CCFE5B00F9F212 /* MenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0B08013CCFE5B00F9F212 /* MenuLayer.m */; };
 		5BA0B08413CCFECB00F9F212 /* RobotLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0B08313CCFECB00F9F212 /* RobotLayer.m */; };
 		5BA0B08D13CCFF8400F9F212 /* SneakyJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0B08613CCFF8400F9F212 /* SneakyJoystick.m */; };
 		5BA0B08E13CCFF8400F9F212 /* SneakyJoystickSkinnedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0B08813CCFF8400F9F212 /* SneakyJoystickSkinnedBase.m */; };
@@ -134,6 +139,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BED435114C555CD005FE3A2 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		1BED435314C55A37005FE3A2 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		1BED435414C55A37005FE3A2 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		1BED435514C55A37005FE3A2 /* MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuViewController.xib; sourceTree = "<group>"; };
+		1BED435814C5659C005FE3A2 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		1BED436714C5EC4A005FE3A2 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		1BED436814C5EC4A005FE3A2 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		1BED436914C5EC4A005FE3A2 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		5B118E3A13CE02910052E176 /* SendUDP.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SendUDP.c; sourceTree = "<group>"; };
 		5B118E3B13CE02910052E176 /* SendUDP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendUDP.h; sourceTree = "<group>"; };
 		5BA0AF0313CCFB1C00F9F212 /* DiscoTech Controller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DiscoTech Controller.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -371,8 +384,6 @@
 		5BA0B07213CCFB1F00F9F212 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		5BA0B07C13CCFDF800F9F212 /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
 		5BA0B07D13CCFDF800F9F212 /* SceneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneManager.m; sourceTree = "<group>"; };
-		5BA0B07F13CCFE5B00F9F212 /* MenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuLayer.h; sourceTree = "<group>"; };
-		5BA0B08013CCFE5B00F9F212 /* MenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuLayer.m; sourceTree = "<group>"; };
 		5BA0B08213CCFECB00F9F212 /* RobotLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RobotLayer.h; sourceTree = "<group>"; };
 		5BA0B08313CCFECB00F9F212 /* RobotLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RobotLayer.m; sourceTree = "<group>"; };
 		5BA0B08513CCFF8400F9F212 /* SneakyJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystick.h; sourceTree = "<group>"; };
@@ -408,6 +419,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BED435E14C5E9E2005FE3A2 /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				1BED435314C55A37005FE3A2 /* MainMenuViewController.h */,
+				1BED435414C55A37005FE3A2 /* MainMenuViewController.m */,
+				1BED435514C55A37005FE3A2 /* MainMenuViewController.xib */,
+				1BED435114C555CD005FE3A2 /* MainWindow.xib */,
+				5BA0B06C13CCFB1F00F9F212 /* RootViewController.h */,
+				5BA0B06D13CCFB1F00F9F212 /* RootViewController.m */,
+				1BED435814C5659C005FE3A2 /* RootViewController.xib */,
+				1BED436714C5EC4A005FE3A2 /* SettingsViewController.h */,
+				1BED436814C5EC4A005FE3A2 /* SettingsViewController.m */,
+				1BED436914C5EC4A005FE3A2 /* SettingsViewController.xib */,
+			);
+			name = UIViews;
+			sourceTree = "<group>";
+		};
 		5BA0AEF813CCFB1B00F9F212 = {
 			isa = PBXGroup;
 			children = (
@@ -443,14 +471,11 @@
 		5BA0AF1713CCFB1C00F9F212 /* DiscoTech Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1BED435E14C5E9E2005FE3A2 /* UIViews */,
 				5BA0B06913CCFB1F00F9F212 /* AppDelegate.h */,
 				5BA0B06A13CCFB1F00F9F212 /* AppDelegate.m */,
-				5BA0B06C13CCFB1F00F9F212 /* RootViewController.h */,
-				5BA0B06D13CCFB1F00F9F212 /* RootViewController.m */,
 				5BA0B07C13CCFDF800F9F212 /* SceneManager.h */,
 				5BA0B07D13CCFDF800F9F212 /* SceneManager.m */,
-				5BA0B07F13CCFE5B00F9F212 /* MenuLayer.h */,
-				5BA0B08013CCFE5B00F9F212 /* MenuLayer.m */,
 				5BA0B08213CCFECB00F9F212 /* RobotLayer.h */,
 				5BA0B08313CCFECB00F9F212 /* RobotLayer.m */,
 				5BA0B07213CCFB1F00F9F212 /* GameConfig.h */,
@@ -859,6 +884,10 @@
 				5BA0AF2613CCFB1C00F9F212 /* Icon.png in Resources */,
 				5BA0AF2813CCFB1C00F9F212 /* Icon@2x.png in Resources */,
 				5BA0AF2B13CCFB1C00F9F212 /* iTunesArtwork in Resources */,
+				1BED435214C555CD005FE3A2 /* MainWindow.xib in Resources */,
+				1BED435714C55A37005FE3A2 /* MainMenuViewController.xib in Resources */,
+				1BED435914C5659C005FE3A2 /* RootViewController.xib in Resources */,
+				1BED436B14C5EC4A005FE3A2 /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,7 +996,6 @@
 				5BA0B06B13CCFB1F00F9F212 /* AppDelegate.m in Sources */,
 				5BA0B06E13CCFB1F00F9F212 /* RootViewController.m in Sources */,
 				5BA0B07E13CCFDF800F9F212 /* SceneManager.m in Sources */,
-				5BA0B08113CCFE5B00F9F212 /* MenuLayer.m in Sources */,
 				5BA0B08413CCFECB00F9F212 /* RobotLayer.m in Sources */,
 				5BA0B08D13CCFF8400F9F212 /* SneakyJoystick.m in Sources */,
 				5BA0B08E13CCFF8400F9F212 /* SneakyJoystickSkinnedBase.m in Sources */,
@@ -976,6 +1004,8 @@
 				5BA0B09313CD007300F9F212 /* ColoredCircleSprite.m in Sources */,
 				5BAF271013CDEEB3002C91F8 /* ColoredSquareSprite.m in Sources */,
 				5B118E3C13CE02910052E176 /* SendUDP.c in Sources */,
+				1BED435614C55A37005FE3A2 /* MainMenuViewController.m in Sources */,
+				1BED436A14C5EC4A005FE3A2 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

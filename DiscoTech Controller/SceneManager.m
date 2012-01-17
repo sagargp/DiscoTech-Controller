@@ -7,6 +7,7 @@
 //
 
 #import "SceneManager.h"
+#import "RobotLayer.h"
 
 @interface SceneManager()
 +(void)go:(CCLayer *)layer;
@@ -15,12 +16,6 @@
 
 @implementation SceneManager
 
-
-+(void)goMenu
-{
-    CCLayer *layer = [MenuLayer node];
-    [SceneManager go:layer];
-}
 
 +(void)goRobot
 {

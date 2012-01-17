@@ -1,8 +1,8 @@
 //
 //  GameConfig.h
-//  DiscoTech Controller
+//  MaskedCal
 //
-//  Created by D. Grayson Smith on 7/12/11.
+//  Created by Ray Wenderlich on 7/17/11.
 //  Copyright __MyCompanyName__ 2011. All rights reserved.
 //
 
@@ -27,7 +27,7 @@
 // TIP:
 // To improve the performance, you should set this value to "kGameAutorotationNone" or "kGameAutorotationCCDirector"
 #if defined(__ARM_NEON__) || TARGET_IPHONE_SIMULATOR
-#define GAME_AUTOROTATION kGameAutorotationCCDirector
+#define GAME_AUTOROTATION kGameAutorotationUIViewController
 
 // ARMv6 (1st and 2nd generation devices): Don't rotate. It is very expensive
 #elif __arm__

@@ -19,6 +19,7 @@
 
 @implementation RobotLayer
 int count = 0;
+
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
@@ -34,18 +35,13 @@ int count = 0;
 	return scene;
 }
 
-
 - (id)init
 {
+    NSLog(@"initializing joysticks");
     self = [super init];
     if (self) {        
         // ask director the the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
-        
-        CCMenuItemFont *back = [CCMenuItemFont itemFromString:@"back" target:self selector:@selector(back:)];
-        CCMenu *menu = [CCMenu menuWithItems:back, nil];
-        menu.position = ccp(size.width/2, 50);
-        [self addChild:menu];
         
         check = [CCLabelTTF labelWithString:@"" 
                                    fontName:@"Helvetica" 
@@ -53,30 +49,32 @@ int count = 0;
         check.position =            ccp(size.width/2, 20);
         [self addChild:check];
         
-        SneakyJoystickSkinnedBase *throttleJoy = [[SneakyJoystickSkinnedBase alloc] init];
-        throttleJoy.position =          ccp(130,size.height/2);
-        throttleJoy.backgroundSprite =  [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:100];
-        throttleJoy.thumbSprite =       [ColoredCircleSprite circleWithColor:ccc4(0, 0, 255, 200) radius:40];
-        throttleJoy.joystick =          [[[SneakyJoystick alloc] initWithRect:CGRectMake(0,0,100,100)] autorelease];
-        throttleJoystick = [throttleJoy.joystick retain];
-        throttleJoystick.deadRadius = 10;
-        throttleJoystick.hasDeadzone = YES;
-        [self addChild:throttleJoy];
-        [throttleJoy release];
-        [throttleJoystick release];
         
-        SneakyJoystickSkinnedBase *steeringJoy = [[SneakyJoystickSkinnedBase alloc] init];
-        steeringJoy.position =         ccp(400, 80);
-        steeringJoy.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:50];
-        steeringJoy.thumbSprite =      [ColoredCircleSprite circleWithColor:ccc4(0, 0, 255, 200) radius:25];
-        steeringJoy.joystick =         [[[SneakyJoystick alloc] initWithRect:CGRectMake(0,0,50,50)] autorelease];
-        steeringJoystick.hasDeadzone = YES;
-        steeringJoystick.deadRadius = 10;
-        steeringJoystick = [steeringJoy.joystick retain];
-        [self addChild:steeringJoy];
-        [steeringJoy release];
-        [steeringJoystick release];
+        SneakyJoystickSkinnedBase *leftJoy = [[SneakyJoystickSkinnedBase alloc] init];
+        leftJoy.position = ccp(110, size.height/2);
+        leftJoy.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:75];
+        leftJoy.thumbSprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 255, 200) radius:40];
+        leftJoy.joystick = [[[SneakyJoystick alloc] initWithRect:CGRectMake(0, 0, 100, 100)] autorelease];
+        leftJoystick = [leftJoy.joystick retain];
+        leftJoystick.deadRadius = 10;
+        leftJoystick.hasDeadzone = YES;
+        [self addChild:leftJoy];
+        [leftJoy release];
+        [leftJoystick release];
+
+        SneakyJoystickSkinnedBase *rightJoy = [[SneakyJoystickSkinnedBase alloc] init];
+        rightJoy.position = ccp(size.width-110, size.height/2);
+        rightJoy.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:75];
+        rightJoy.thumbSprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 255, 200) radius:40];
+        rightJoy.joystick = [[[SneakyJoystick alloc] initWithRect:CGRectMake(0, 0, 100, 100)] autorelease];
+        rightJoystick = [rightJoy.joystick retain];
+        rightJoystick.deadRadius = 10;
+        rightJoystick.hasDeadzone = YES;
+        [self addChild:rightJoy];
+        [rightJoy release];
+        [rightJoystick release];
         
+        /*
         SneakyJoystickSkinnedBase *leftArmJoy = [[[SneakyJoystickSkinnedBase alloc] init] autorelease];
         leftArmJoy.position =           ccp(280, 270);
         leftArmJoy.backgroundSprite =   [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:32];
@@ -103,6 +101,7 @@ int count = 0;
         led.isToggleable = NO;
         led.isHoldable = YES;
         [self addChild:ledBut];
+        */
         
 		[self scheduleUpdate];
     }
@@ -113,33 +112,29 @@ int count = 0;
 {
     int t,s;
     float ttemp, stemp;
-    ttemp = throttleJoystick.stickPosition.y;
+    ttemp = leftJoystick.stickPosition.y;
     t = roundf(((ttemp + 100)*255)/200);
-    stemp = throttleJoystick.stickPosition.x;
+    stemp = leftJoystick.stickPosition.x;
     s = roundf(((stemp+100)*255)/200);
     
     int h,v;
     float htemp, vtemp;
-    htemp = steeringJoystick.stickPosition.x;
+    htemp = rightJoystick.stickPosition.x;
     h = roundf(((htemp+50)*255)/100);
-    vtemp = steeringJoystick.stickPosition.y;
+    vtemp = rightJoystick.stickPosition.y;
     v = roundf(((vtemp+50)*255)/100);
-        
+
+    int l, r, ledOn;
+    /*
     int l,r;
     float ltemp,rtemp;
     ltemp = leftArmJoystick.stickPosition.y;
     l = roundf(((ltemp+32)*255)/64);
     rtemp = rightArmJoystick.stickPosition.y;
     r = roundf(((rtemp+32)*255)/64);
+    */
     
-    int ledOn;
-    if (led.active) {
-        ledOn = 1;
-    } else {
-        ledOn = 0;
-    }
-    
-    data[0] = 'b';
+    data[0] = (unsigned char) 'b';
     data[1] = (unsigned char) t;
     data[2] = (unsigned char) s;
     data[3] = (unsigned char) h;
@@ -148,10 +143,10 @@ int count = 0;
     data[6] = (unsigned char) r;
     data[7] = (unsigned char) 128;
     data[8] = (unsigned char) ledOn;
-    data[9] = 'e';
+    data[9] = (unsigned char) 'e';
     
     //check.string = [NSString stringWithCharacters:data length:10];
-    
+    NSLog(@"Sending packet: %s", data);
     SUDP_SendMsg(data, 10);
 }
 
@@ -164,12 +159,6 @@ int count = 0;
 	
 	// don't forget to call "super dealloc"
 	[super dealloc];
-}
-
-
--(void)back:(id)sender
-{
-    [SceneManager goMenu];
 }
 
 @end

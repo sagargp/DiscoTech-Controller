@@ -10,8 +10,8 @@
 
 #import "AppDelegate.h"
 #import "GameConfig.h"
-#import "MenuLayer.h"
-#import "RootViewController.h"
+//#import "MenuLayer.h"
+//#import "RootViewController.h"
 #import "SendUDP.h"
 
 @implementation AppDelegate
@@ -26,23 +26,24 @@
 	// Uncomment the following code if you Application only supports landscape mode
 	//
 #if GAME_AUTOROTATION == kGameAutorotationUIViewController
-
-	CC_ENABLE_DEFAULT_GL_STATES();
-	CCDirector *director = [CCDirector sharedDirector];
-	CGSize size = [director winSize];
-	CCSprite *sprite = [CCSprite spriteWithFile:@"Default.png"];
-	sprite.position = ccp(size.width/2, size.height/2);
-	sprite.rotation = -90;
-	[sprite visit];
-	[[director openGLView] swapBuffers];
-	CC_ENABLE_DEFAULT_GL_STATES();
+    
+    //	CC_ENABLE_DEFAULT_GL_STATES();
+    //	CCDirector *director = [CCDirector sharedDirector];
+    //	CGSize size = [director winSize];
+    //	CCSprite *sprite = [CCSprite spriteWithFile:@"Default.png"];
+    //	sprite.position = ccp(size.width/2, size.height/2);
+    //	sprite.rotation = -90;
+    //	[sprite visit];
+    //	[[director openGLView] swapBuffers];
+    //	CC_ENABLE_DEFAULT_GL_STATES();
 	
-#endif  //GAME_AUTOROTATION == kGameAutorotationUIViewController	
+#endif // GAME_AUTOROTATION == kGameAutorotationUIViewController	
 }
+
 - (void) applicationDidFinishLaunching:(UIApplication*)application
 {
 	// Init the window
-	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
 	// Try to use CADisplayLink director
 	// if it fails (SDK < 3.1) use the default director
@@ -52,27 +53,29 @@
 	
 	CCDirector *director = [CCDirector sharedDirector];
 	
-	// Init the View Controller
-	viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
-	viewController.wantsFullScreenLayout = YES;
+    /* RJW
+     // Init the View Controller
+     viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
+     viewController.wantsFullScreenLayout = YES;
+     
+     //
+     // Create the EAGLView manually
+     //  1. Create a RGB565 format. Alternative: RGBA8
+     //	2. depth format of 0 bit. Use 16 or 24 bit for 3d effects, like CCPageTurnTransition
+     //
+     //
+     EAGLView *glView = [EAGLView viewWithFrame:[window bounds]
+     pixelFormat:kEAGLColorFormatRGB565	// kEAGLColorFormatRGBA8
+     depthFormat:0						// GL_DEPTH_COMPONENT16_OES
+     ];
+     
+     // attach the openglView to the director
+     [director setOpenGLView:glView];
+     */
 	
-	//
-	// Create the EAGLView manually
-	//  1. Create a RGB565 format. Alternative: RGBA8
-	//	2. depth format of 0 bit. Use 16 or 24 bit for 3d effects, like CCPageTurnTransition
-	//
-	//
-	EAGLView *glView = [EAGLView viewWithFrame:[window bounds]
-								   pixelFormat:kEAGLColorFormatRGB565	// kEAGLColorFormatRGBA8
-								   depthFormat:0						// GL_DEPTH_COMPONENT16_OES
-						];
-	
-	// attach the openglView to the director
-	[director setOpenGLView:glView];
-	
-	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-    if( ! [director enableRetinaDisplay:YES] )
-        CCLOG(@"Retina Display Not supported");
+    //	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
+	if( ! [director enableRetinaDisplay:YES] )
+		CCLOG(@"Retina Display Not supported");
 	
 	//
 	// VERY IMPORTANT:
@@ -91,15 +94,14 @@
 	
 	[director setAnimationInterval:1.0/60];
 	[director setDisplayFPS:NO];
-    
-    [glView setMultipleTouchEnabled:YES];
 	
-	
-	// make the OpenGLView a child of the view controller
-	[viewController setView:glView];
-	
-	// make the View Controller a child of the main window
-	[window addSubview: viewController.view];
+    /* 
+     // make the OpenGLView a child of the view controller
+     [viewController setView:glView];
+     
+     // make the View Controller a child of the main window
+     [window addSubview: viewController.view];
+     */
 	
 	[window makeKeyAndVisible];
 	
@@ -107,15 +109,23 @@
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
 	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-
+    
 	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
-	
-	// Run the intro Scene
-	[SceneManager goMenu];
+    /*
+     [[CCDirector sharedDirector] runWithScene: [HelloWorldLayer sceneWithLastCalendar:0]]; 
+     */
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ( [defaults stringForKey:@"hostname"] == nil)
+    {
+        NSString *key = @"hostname";
+        NSString *value = @"192.168.1.102";
+        [defaults setObject:value forKey:key];
+        [defaults synchronize];
+    }
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     SUDP_Close();
@@ -123,8 +133,9 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    NSString *ipAddress = @"192.168.1.102";
-    SUDP_Init([ipAddress cStringUsingEncoding:NSASCIIStringEncoding]);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *host = [defaults stringForKey:@"hostname"];
+    SUDP_Init([host cStringUsingEncoding:NSASCIIStringEncoding]);
 	[[CCDirector sharedDirector] resume];
 }
 
@@ -138,8 +149,9 @@
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application {
-    NSString *ipAddress = @"192.168.1.102";
-    SUDP_Init([ipAddress cStringUsingEncoding:NSASCIIStringEncoding]);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *host = [defaults stringForKey:@"hostname"];
+    SUDP_Init([host cStringUsingEncoding:NSASCIIStringEncoding]);
 	[[CCDirector sharedDirector] startAnimation];
 }
 

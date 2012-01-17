@@ -25,7 +25,7 @@ int SUDP_Init(const char* ipaddress){
 }
 
 //Send a UDP packet
-int SUDP_SendMsg(const char * data, int length)
+int SUDP_SendMsg(const unsigned char * data, int length)
 {
     int numbytes;
     if ((numbytes = sendto(sockfd, data, length, 0,

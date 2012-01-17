@@ -14,18 +14,14 @@
 
 @interface RobotLayer : CCLayer
 {
-    SneakyJoystick *throttleJoystick;
-    SneakyJoystick *steeringJoystick;
-    SneakyJoystick *leftArmJoystick;
-    SneakyJoystick *rightArmJoystick;
-    
-    SneakyButton *led;
-    SneakyButton *eyesL;
-    SneakyButton *eyesR;
+    SneakyJoystick *leftJoystick;
+    SneakyJoystick *rightJoystick;
+    SneakyButton *b1;
+    SneakyButton *b2;
     
     CCLabelTTF *check;
     
-    unsigned char data[10];
+    unsigned char data[6];
 }
 
 -(void)back:(id)sender;
