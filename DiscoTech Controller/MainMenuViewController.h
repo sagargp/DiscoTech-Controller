@@ -8,18 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "RootViewController.h"
-#import "SettingsViewController.h"
 
 @interface MainMenuViewController : UIViewController
 {
     RootViewController *_rootViewController;
-    SettingsViewController *_settingsViewController;
 }
 
 @property (retain) RootViewController *rootViewController;
-@property (retain) SettingsViewController *settingsViewController;
+@property (retain, nonatomic) IBOutlet UITextField *hostnameField;
 
-- (IBAction)viewTapped:(id)sender;
-- (IBAction)settingsTapped:(id)sender;
+- (IBAction)connectTapped:(id)sender;
 
 @end

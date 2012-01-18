@@ -16,15 +16,7 @@
 {
     SneakyJoystick *leftJoystick;
     SneakyJoystick *rightJoystick;
-    SneakyButton *b1;
-    SneakyButton *b2;
-    
-    CCLabelTTF *check;
-    
-    unsigned char data[6];
 }
-
--(void)back:(id)sender;
 
 +(CCScene *) scene;
 

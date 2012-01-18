@@ -42,14 +42,7 @@ int count = 0;
     if (self) {        
         // ask director the the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
-        
-        check = [CCLabelTTF labelWithString:@"" 
-                                   fontName:@"Helvetica" 
-                                   fontSize:20];
-        check.position =            ccp(size.width/2, 20);
-        [self addChild:check];
-        
-        
+
         SneakyJoystickSkinnedBase *leftJoy = [[SneakyJoystickSkinnedBase alloc] init];
         leftJoy.position = ccp(110, size.height/2);
         leftJoy.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:75];
@@ -74,35 +67,6 @@ int count = 0;
         [rightJoy release];
         [rightJoystick release];
         
-        /*
-        SneakyJoystickSkinnedBase *leftArmJoy = [[[SneakyJoystickSkinnedBase alloc] init] autorelease];
-        leftArmJoy.position =           ccp(280, 270);
-        leftArmJoy.backgroundSprite =   [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:32];
-        leftArmJoy.thumbSprite =        [ColoredCircleSprite circleWithColor:ccc4(0, 0, 255, 200) radius:16];
-        leftArmJoy.joystick =           [[[SneakyJoystick alloc] initWithRect:CGRectMake(0, 0, 32, 32)] autorelease];
-        leftArmJoystick = [leftArmJoy.joystick retain];
-        [self addChild:leftArmJoy];
-        
-        SneakyJoystickSkinnedBase *rightArmJoy = [[[SneakyJoystickSkinnedBase alloc] init] autorelease];
-        rightArmJoy.position =           ccp(380, 270);
-        rightArmJoy.backgroundSprite =   [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:32];
-        rightArmJoy.thumbSprite =        [ColoredCircleSprite circleWithColor:ccc4(0, 0, 255, 200) radius:16];
-        rightArmJoy.joystick =           [[[SneakyJoystick alloc] initWithRect:CGRectMake(0, 0, 32, 32)] autorelease];
-        rightArmJoystick = [rightArmJoy.joystick retain];
-        [self addChild:rightArmJoy];
-        
-        SneakyButtonSkinnedBase *ledBut = [[[SneakyButtonSkinnedBase alloc] init] autorelease];
-        ledBut.position =           ccp(330, 190);
-        ledBut.defaultSprite =      [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:32];
-        //ledBut.activatedSprite =    [CCSprite spriteWithFile:@"p3.png"];
-        ledBut.pressSprite =        [ColoredCircleSprite circleWithColor:ccc4(0, 255, 0, 128) radius:32];
-        ledBut.button =             [[[SneakyButton alloc] initWithRect:CGRectMake(0, 0, 64, 64)] autorelease];
-        led = [ledBut.button retain];
-        led.isToggleable = NO;
-        led.isHoldable = YES;
-        [self addChild:ledBut];
-        */
-        
 		[self scheduleUpdate];
     }
     return self;
@@ -110,44 +74,22 @@ int count = 0;
 
 -(void) update: (ccTime) dt
 {
-    int t,s;
-    float ttemp, stemp;
-    ttemp = leftJoystick.stickPosition.y;
-    t = roundf(((ttemp + 100)*255)/200);
-    stemp = leftJoystick.stickPosition.x;
-    s = roundf(((stemp+100)*255)/200);
-    
-    int h,v;
-    float htemp, vtemp;
-    htemp = rightJoystick.stickPosition.x;
-    h = roundf(((htemp+50)*255)/100);
-    vtemp = rightJoystick.stickPosition.y;
-    v = roundf(((vtemp+50)*255)/100);
+    if (SUDP_IsOpen())
+    {
+        // write out the left.x, left.y, right.x, right.y positions
+        char data[6];
+        
+        // the radius of the joysticks is 75
+        
+        data[0] = 's';
+        data[1] = (((leftJoystick.stickPosition.x / 75.0) + 1.0)/2) * 255;
+        data[2] = (((leftJoystick.stickPosition.y / 75.0) + 1.0)/2) * 255;
+        data[3] = (((rightJoystick.stickPosition.x / 75.0) + 1.0)/2) * 255;
+        data[4] = (((rightJoystick.stickPosition.y / 75.0) + 1.0)/2) * 255;
+        data[5] = 'e';
 
-    int l, r, ledOn;
-    /*
-    int l,r;
-    float ltemp,rtemp;
-    ltemp = leftArmJoystick.stickPosition.y;
-    l = roundf(((ltemp+32)*255)/64);
-    rtemp = rightArmJoystick.stickPosition.y;
-    r = roundf(((rtemp+32)*255)/64);
-    */
-    
-    data[0] = (unsigned char) 'b';
-    data[1] = (unsigned char) t;
-    data[2] = (unsigned char) s;
-    data[3] = (unsigned char) h;
-    data[4] = (unsigned char) v;
-    data[5] = (unsigned char) l;
-    data[6] = (unsigned char) r;
-    data[7] = (unsigned char) 128;
-    data[8] = (unsigned char) ledOn;
-    data[9] = (unsigned char) 'e';
-    
-    //check.string = [NSString stringWithCharacters:data length:10];
-    NSLog(@"Sending packet: %s", data);
-    SUDP_SendMsg(data, 10);
+        SUDP_SendMsg(data, 6);
+    }
 }
 
 // on "dealloc" you need to release all your retained objects

@@ -7,14 +7,21 @@
 //
 
 #import "MainMenuViewController.h"
+#import "SendUDP.h"
 
 @implementation MainMenuViewController
+@synthesize hostnameField = _hostnameField;
 
 @synthesize rootViewController = _rootViewController;
-@synthesize settingsViewController = _settingsViewController;
 
-- (IBAction)viewTapped:(id)sender
+- (IBAction)connectTapped:(id)sender
 {
+    SUDP_Close();
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[self hostnameField].text forKey:@"hostname"];
+    [defaults synchronize];
+    SUDP_Init([[self hostnameField].text cStringUsingEncoding:NSASCIIStringEncoding]);
+    
     if (_rootViewController == nil)
     {
         self.rootViewController = [[[RootViewController alloc] initWithNibName:nil bundle:nil] autorelease];
@@ -22,20 +29,11 @@
     [self.navigationController pushViewController:_rootViewController animated:YES];
 }
 
-- (IBAction)settingsTapped:(id)sender
-{
-    if (_settingsViewController == nil)
-    {
-        self.settingsViewController = [[[SettingsViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-    }
-    
-    [self.navigationController pushViewController:_settingsViewController animated:YES];
-}
-
 - (void)dealloc
 {
     [_rootViewController release];
     _rootViewController = nil;
+    [_hostnameField release];
     [super dealloc];
 }
 
@@ -62,10 +60,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ( [defaults stringForKey:@"hostname"] != nil)
+    {
+        [_hostnameField setText:[defaults stringForKey:@"hostname"]];
+    }
 }
 
 - (void)viewDidUnload
 {
+    [self setHostnameField:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -82,6 +86,12 @@
 {
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField*)textField
+{
+    [textField resignFirstResponder];
+    return NO;
 }
 
 @end
